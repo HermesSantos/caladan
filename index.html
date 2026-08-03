@@ -245,25 +245,55 @@ footer{
 
         <div class="panel player">
 
-            <h2>Música</h2>
+            <div class="panel player">
 
-            <iframe
-                src="https://www.youtube.com/embed/gOwbMN0JswA?start=1712"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-            </iframe>
+                <h2>Música</h2>
+
+                <div class="player-controls">
+                    <input
+                        id="music-url"
+                        type="text"
+                        placeholder="Cole uma URL do YouTube">
+
+                    <button onclick="updatePlayer('music')">
+                        Atualizar
+                    </button>
+                </div>
+
+                <iframe
+                    id="music-player"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
 
         </div>
 
         <div class="panel player">
 
-            <h2>Brown Noise</h2>
+            <div class="panel player">
 
-            <iframe
-                src="https://www.youtube.com/embed/RqzGzwTY-6w?start=15788"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-            </iframe>
+                <h2>Brown Noise</h2>
+
+                <div class="player-controls">
+                    <input
+                        id="noise-url"
+                        type="text"
+                        placeholder="Cole uma URL do YouTube">
+
+                    <button onclick="updatePlayer('noise')">
+                        Atualizar
+                    </button>
+                </div>
+
+                <iframe
+                    id="noise-player"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen>
+                </iframe>
+
+            </div>  
 
         </div>
 
