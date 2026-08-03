@@ -1,355 +1,424 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Caladan Focus</title>
+    <title>Caladan Focus</title>
 
-<style>
-:root{
-    --bg:#00141d;
-    --bg2:#00212b;
+    <style>
+      :root {
+        --bg: #00141d;
+        --bg2: #00212b;
 
-    --surface:#073642;
-    --surface-light:#0b4457;
-    --border:#164b5b;
+        --surface: #073642;
+        --surface-light: #0b4457;
+        --border: #164b5b;
 
-    --text:#e8ece9;
-    --muted:#93a1a1;
+        --text: #e8ece9;
+        --muted: #93a1a1;
 
-    --cyan:#2aa198;
-    --blue:#268bd2;
-    --green:#859900;
-}
+        --cyan: #2aa198;
+        --blue: #268bd2;
+        --green: #859900;
+      }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-html,body{
-    height:100%;
-}
+      html,
+      body {
+        height: 100%;
+      }
 
-body{
-    background:
-        radial-gradient(circle at top,#09384b 0%,transparent 45%),
-        linear-gradient(180deg,var(--bg),var(--bg2));
+      body {
+        background:
+          radial-gradient(circle at top, #09384b 0%, transparent 45%),
+          linear-gradient(180deg, var(--bg), var(--bg2));
 
-    color:var(--text);
-    font-family:Inter,Segoe UI,system-ui,sans-serif;
-    overflow:hidden;
-}
+        color: var(--text);
+        font-family:
+          Inter,
+          Segoe UI,
+          system-ui,
+          sans-serif;
+        overflow: hidden;
+      }
 
-/* HEADER */
+      /* HEADER */
 
-header{
-    height:64px;
+      header {
+        height: 64px;
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-    padding:0 28px;
+        padding: 0 28px;
 
-    border-bottom:1px solid var(--border);
+        border-bottom: 1px solid var(--border);
 
-    background:rgba(0,0,0,.15);
-    backdrop-filter:blur(10px);
-}
+        background: rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+      }
 
-header h1{
-    font-size:20px;
-    color:var(--cyan);
-    letter-spacing:.08em;
-}
+      header h1 {
+        font-size: 20px;
+        color: var(--cyan);
+        letter-spacing: 0.08em;
+      }
 
-#clock{
-    color:var(--muted);
-    font-size:15px;
-}
+      #clock {
+        color: var(--muted);
+        font-size: 15px;
+      }
 
-/* LAYOUT */
+      /* LAYOUT */
 
-.container{
+      .container {
+        display: grid;
+        grid-template-columns: 340px 1fr;
 
-    display:grid;
-    grid-template-columns:340px 1fr;
+        height: calc(100vh - 64px);
+      }
 
-    height:calc(100vh - 64px);
+      /* LEFT */
 
-}
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
 
-/* LEFT */
+        padding: 20px;
 
-.sidebar{
+        border-right: 1px solid var(--border);
+      }
 
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+      /* PANEL */
 
-    padding:20px;
+      .panel {
+        background: rgba(7, 54, 66, 0.75);
 
-    border-right:1px solid var(--border);
+        border: 1px solid var(--border);
 
-}
+        border-radius: 14px;
 
-/* PANEL */
+        overflow: hidden;
 
-.panel{
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
 
-    background:rgba(7,54,66,.75);
+      .panel h2 {
+        padding: 12px 16px;
 
-    border:1px solid var(--border);
+        font-size: 13px;
 
-    border-radius:14px;
+        letter-spacing: 0.15em;
 
-    overflow:hidden;
+        text-transform: uppercase;
 
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.2);
+        color: var(--cyan);
 
-}
+        border-bottom: 1px solid var(--border);
+      }
 
-.panel h2{
+      .player-controls {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+      }
 
-    padding:12px 16px;
+      .player-controls input {
+        flex: 1;
 
-    font-size:13px;
+        padding: 10px 12px;
 
-    letter-spacing:.15em;
+        border: none;
+        outline: none;
 
-    text-transform:uppercase;
+        border-radius: 8px;
 
-    color:var(--cyan);
+        background: #002b36;
 
-    border-bottom:1px solid var(--border);
+        color: white;
+      }
 
-}
+      .player-controls button {
+        cursor: pointer;
 
-/* PLAYER */
+        border: none;
 
-.player iframe{
+        padding: 10px 14px;
 
-    width:100%;
-    aspect-ratio:16/9;
+        border-radius: 8px;
 
-    border:none;
+        background: #268bd2;
 
-    display:block;
+        color: white;
 
-}
+        font-weight: bold;
 
-/* EDITOR */
+        transition: 0.2s;
+      }
 
-.editor{
+      .player-controls button:hover {
+        filter: brightness(1.1);
+      }
 
-    padding:20px;
+      /* PLAYER */
 
-    display:flex;
+      .player iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
 
-}
+        border: none;
 
-.notes{
+        display: block;
+      }
 
-    flex:1;
+      /* EDITOR */
 
-    display:flex;
-    flex-direction:column;
+      .editor {
+        padding: 20px;
 
-}
+        display: flex;
+      }
 
-textarea{
+      .notes {
+        flex: 1;
 
-    flex:1;
+        display: flex;
+        flex-direction: column;
+      }
 
-    width:100%;
+      textarea {
+        flex: 1;
 
-    resize:none;
+        width: 100%;
 
-    border:none;
-    outline:none;
+        resize: none;
 
-    border-radius:14px;
+        border: none;
+        outline: none;
 
-    padding:26px;
+        border-radius: 14px;
 
-    background:rgba(7,54,66,.78);
+        padding: 26px;
 
-    color:var(--text);
+        background: rgba(7, 54, 66, 0.78);
 
-    font-size:16px;
+        color: var(--text);
 
-    line-height:1.8;
+        font-size: 16px;
 
-    font-family:
-        "JetBrains Mono",
-        Consolas,
-        monospace;
+        line-height: 1.8;
 
-    border:1px solid var(--border);
+        font-family: "JetBrains Mono", Consolas, monospace;
 
-}
+        border: 1px solid var(--border);
+      }
 
-textarea::placeholder{
-    color:#6e8a8d;
-}
+      textarea::placeholder {
+        color: #6e8a8d;
+      }
 
-/* FOOTER */
+      /* FOOTER */
 
-footer{
+      footer {
+        position: fixed;
 
-    position:fixed;
+        right: 20px;
+        bottom: 12px;
 
-    right:20px;
-    bottom:12px;
+        color: #4d6b6f;
 
-    color:#4d6b6f;
+        font-size: 12px;
+      }
 
-    font-size:12px;
+      /* Scroll */
 
-}
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-/* Scroll */
+      ::-webkit-scrollbar-thumb {
+        background: #335b64;
+        border-radius: 20px;
+      }
 
-::-webkit-scrollbar{
-    width:8px;
-}
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Caladan Focus</h1>
 
-::-webkit-scrollbar-thumb{
-    background:#335b64;
-    border-radius:20px;
-}
+      <div id="clock"></div>
+    </header>
 
-::-webkit-scrollbar-track{
-    background:transparent;
-}
-</style>
-
-</head>
-<body>
-
-<header>
-
-    <h1>Caladan Focus</h1>
-
-    <div id="clock"></div>
-
-</header>
-
-<div class="container">
-
-    <aside class="sidebar">
-
+    <div class="container">
+      <aside class="sidebar">
         <div class="panel player">
+          <div class="panel player">
+            <h2>Música</h2>
 
-            <div class="panel player">
+            <div class="player-controls">
+              <input
+                id="music-url"
+                type="text"
+                placeholder="Cole uma URL do YouTube"
+              />
 
-                <h2>Música</h2>
-
-                <div class="player-controls">
-                    <input
-                        id="music-url"
-                        type="text"
-                        placeholder="Cole uma URL do YouTube">
-
-                    <button onclick="updatePlayer('music')">
-                        Atualizar
-                    </button>
-                </div>
-
-                <iframe
-                    id="music-player"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
-
+              <button onclick="updatePlayer('music')">Atualizar</button>
             </div>
 
+            <iframe
+              id="music-player"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
         </div>
 
         <div class="panel player">
+          <div class="panel player">
+            <h2>Brown Noise</h2>
 
-            <div class="panel player">
+            <div class="player-controls">
+              <input
+                id="noise-url"
+                type="text"
+                placeholder="Cole uma URL do YouTube"
+              />
 
-                <h2>Brown Noise</h2>
+              <button onclick="updatePlayer('noise')">Atualizar</button>
+            </div>
 
-                <div class="player-controls">
-                    <input
-                        id="noise-url"
-                        type="text"
-                        placeholder="Cole uma URL do YouTube">
-
-                    <button onclick="updatePlayer('noise')">
-                        Atualizar
-                    </button>
-                </div>
-
-                <iframe
-                    id="noise-player"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen>
-                </iframe>
-
-            </div>  
-
+            <iframe
+              id="noise-player"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
         </div>
+      </aside>
 
-    </aside>
-
-    <main class="editor">
-
+      <main class="editor">
         <div class="notes">
-
-<textarea id="notes" placeholder="# Anotações
+          <textarea
+            id="notes"
+            placeholder="# Anotações
 
 • Tarefas
 • Ideias
 • Lembretes
 
 Tudo é salvo automaticamente.
-"></textarea>
-
+"
+          ></textarea>
         </div>
+      </main>
+    </div>
 
-    </main>
+    <footer>Solarized Osaka Focus</footer>
 
-</div>
+    <script>
+      const DEFAULT_MUSIC =
+        "https://www.youtube.com/watch?v=gOwbMN0JswA&t=1712s";
 
-<footer>
-Solarized Osaka Focus
-</footer>
+      const DEFAULT_NOISE =
+        "https://www.youtube.com/watch?v=RqzGzwTY-6w&t=15788s";
 
-<script>
+      const textarea = document.getElementById("notes");
 
-const textarea = document.getElementById("notes");
+      textarea.value = localStorage.getItem("focus-notes") || "";
 
-textarea.value = localStorage.getItem("focus-notes") || "";
+      textarea.addEventListener("input", () => {
+        localStorage.setItem("focus-notes", textarea.value);
+      });
 
-textarea.addEventListener("input", () => {
+      function loadPlayers() {
+        const music = localStorage.getItem("music-url") || DEFAULT_MUSIC;
 
-    localStorage.setItem("focus-notes", textarea.value);
+        const noise = localStorage.getItem("noise-url") || DEFAULT_NOISE;
 
-});
+        document.getElementById("music-url").value = music;
+        document.getElementById("noise-url").value = noise;
 
-function updateClock(){
+        document.getElementById("music-player").src = getEmbedUrl(music);
 
-    const now = new Date();
+        document.getElementById("noise-player").src = getEmbedUrl(noise);
+      }
 
-    document.getElementById("clock").textContent =
-        now.toLocaleDateString("pt-BR") +
-        " • " +
-        now.toLocaleTimeString("pt-BR");
+      loadPlayers();
 
-}
+      function getEmbedUrl(url) {
+        try {
+          const u = new URL(url);
 
-updateClock();
+          let id = "";
 
-setInterval(updateClock,1000);
+          if (u.hostname.includes("youtu.be")) {
+            id = u.pathname.slice(1);
+          } else {
+            id = u.searchParams.get("v");
+          }
 
-</script>
+          const t = u.searchParams.get("t");
 
-</body>
+          let seconds = 0;
+
+          if (t) {
+            if (t.endsWith("s")) {
+              seconds = parseInt(t);
+            } else {
+              seconds = parseInt(t);
+            }
+          }
+
+          return `https://www.youtube.com/embed/${id}?start=${seconds}`;
+        } catch {
+          return "";
+        }
+      }
+
+      function updatePlayer(type) {
+        const input = document.getElementById(type + "-url");
+
+        const iframe = document.getElementById(type + "-player");
+
+        const embed = getEmbedUrl(input.value);
+
+        if (!embed) {
+          alert("URL inválida");
+
+          return;
+        }
+
+        iframe.src = embed;
+
+        localStorage.setItem(type + "-url", input.value);
+      }
+
+      function updateClock() {
+        const now = new Date();
+
+        document.getElementById("clock").textContent =
+          now.toLocaleDateString("pt-BR") +
+          " • " +
+          now.toLocaleTimeString("pt-BR");
+      }
+
+      updateClock();
+
+      setInterval(updateClock, 1000);
+    </script>
+  </body>
 </html>
