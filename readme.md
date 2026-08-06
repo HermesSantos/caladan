@@ -1,101 +1,44 @@
-# 🎧 Focus Space
+# Caladan Focus
 
-Um ambiente minimalista para concentração, criado para reduzir distrações e manter tudo o que você precisa em uma única página.
-
-A ideia é simples: em vez de abrir diversas abas para música, ruído ambiente e anotações, o **Focus Space** reúne tudo em uma interface limpa inspirada na paleta **Solarized Osaka Dark**.
+Ambiente minimalista para concentração: música, brown noise e anotações em uma única página, sem servidor e sem distrações.
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-* 📝 Área de anotações com salvamento automático (`localStorage`)
-* 🎵 Player de música do YouTube
-* 🌧️ Player de Brown Noise do YouTube
-* ▶️ Os dois vídeos podem tocar ao mesmo tempo
-* 🕒 Relógio em tempo real
-* 🌙 Interface escura inspirada no Solarized Osaka
-* 💾 Não requer servidor ou banco de dados
-
----
-
-## 📷 Layout
-
-```
-+--------------------------------------------------------------+
-| Focus Space                                   13:42          |
-+--------------------------+-----------------------------------+
-|                          |                                   |
-| 🎵 Música                |                                   |
-| ┌──────────────────────┐ |                                   |
-| │                      │ |                                   |
-| └──────────────────────┘ |                                   |
-|                          |                                   |
-| 🌧 Brown Noise          |         📝 Anotações               |
-| ┌──────────────────────┐ |                                   |
-| │                      │ |                                   |
-| └──────────────────────┘ |                                   |
-|                          |                                   |
-|                          |                                   |
-+--------------------------+-----------------------------------+
-```
+* Anotações com salvamento automático (`localStorage`)
+* Player de música do YouTube
+* Player de brown noise do YouTube (os dois tocam ao mesmo tempo)
+* Relógio em tempo real
+* Temas selecionáveis (persistidos no navegador)
+* Zero dependências
 
 ---
 
-## 🚀 Como usar
+## Temas
 
-Clone o repositório:
+Troque pelo seletor no canto superior direito. A escolha fica salva em `localStorage`.
 
-```bash
-git clone https://github.com/seu-usuario/focus-space.git
-```
+| Tema              | Estilo                                      |
+| ----------------- | ------------------------------------------- |
+| **shadcn**        | Zinc dark, cards e focus ring no estilo UI  |
+| **Solarized Osaka** | Paleta Solarized Dark / Osaka, com glow   |
+| **Tokyo Night**   | Azul `#7aa2f7`, fundo `#1a1b26`             |
 
-Entre na pasta:
+### Referência rápida de cores
 
-```bash
-cd focus-space
-```
+**shadcn**
 
-Abra o arquivo `index.html` em qualquer navegador moderno.
+| Token      | Hex       |
+| ---------- | --------- |
+| Background | `#09090b` |
+| Border     | `#27272a` |
+| Primary    | `#fafafa` |
+| Text       | `#fafafa` |
 
-Não é necessário instalar dependências nem executar um servidor.
+**Solarized Osaka**
 
----
-
-## 💾 Persistência
-
-As anotações são armazenadas automaticamente utilizando o **Local Storage** do navegador.
-
-Isso significa que:
-
-* não há login;
-* não há banco de dados;
-* não há sincronização;
-* os dados permanecem disponíveis enquanto o cache do navegador não for apagado.
-
----
-
-## 🎵 Sons incluídos
-
-### Música
-
-https://www.youtube.com/watch?v=gOwbMN0JswA
-
-### Brown Noise
-
-https://www.youtube.com/watch?v=RqzGzwTY-6w
-
----
-
-## 🎨 Paleta
-
-Inspirado em:
-
-* Solarized Dark
-* Solarized Osaka
-
-Principais cores utilizadas:
-
-| Cor        | Hex       |
+| Token      | Hex       |
 | ---------- | --------- |
 | Background | `#00141d` |
 | Surface    | `#073642` |
@@ -104,37 +47,52 @@ Principais cores utilizadas:
 | Blue       | `#268bd2` |
 | Text       | `#e8ece9` |
 
+**Tokyo Night**
+
+| Token      | Hex       |
+| ---------- | --------- |
+| Background | `#1a1b26` |
+| Card       | `#16161e` |
+| Border     | `#292e42` |
+| Blue       | `#7aa2f7` |
+| Muted      | `#565f89` |
+| Text       | `#c0caf5` |
+
 ---
 
-## 📁 Estrutura
+## Layout
 
 ```
-.
-└── index.html
++--------------------------------------------------------------+
+| Caladan Focus          [tema ▾]              data · hora     |
++--------------------------+-----------------------------------+
+|                          |                                   |
+| Música                   |                                   |
+| ┌──────────────────────┐ |                                   |
+| │                      │ |                                   |
+| └──────────────────────┘ |         Anotações                 |
+|                          |                                   |
+| Brown Noise              |                                   |
+| ┌──────────────────────┐ |                                   |
+| │                      │ |                                   |
+| └──────────────────────┘ |                                   |
+|                          |                                   |
++--------------------------+-----------------------------------+
 ```
 
-Todo o projeto está contido em um único arquivo:
+## Persistência
 
-* HTML
-* CSS
-* JavaScript
+Tudo fica no **Local Storage** do navegador:
 
----
+| Chave           | Conteúdo              |
+| --------------- | --------------------- |
+| `focus-notes`   | Texto das anotações   |
+| `music-url`     | URL do player de música |
+| `noise-url`     | URL do brown noise    |
+| `focus-theme`   | Tema ativo            |
 
-## 🛣️ Roadmap
+Sem login, sem banco, sem sync — os dados duram enquanto o cache do navegador não for limpo.
 
-* [ ] Controle de volume dos players
-* [ ] Pomodoro
-* [ ] Checklist
-* [ ] Editor Markdown
-* [ ] Fullscreen
-* [ ] Atalhos de teclado
-* [ ] Modo Zen
-* [ ] Temas (Gruvbox, Catppuccin, Nord...)
-* [ ] Sons adicionais (chuva, lareira, floresta, café, vento)
+## Licença
 
----
-
-## 📄 Licença
-
-Este projeto é disponibilizado sob a licença MIT.
+MIT
