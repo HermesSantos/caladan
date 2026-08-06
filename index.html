@@ -3,24 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Caladan Focus</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --bg: #00141d;
-        --bg2: #00212b;
-
-        --surface: #073642;
-        --surface-light: #0b4457;
-        --border: #164b5b;
-
-        --text: #e8ece9;
-        --muted: #93a1a1;
-
-        --cyan: #2aa198;
-        --blue: #268bd2;
-        --green: #859900;
+        --background: hsl(240 10% 3.9%);
+        --foreground: hsl(0 0% 98%);
+        --card: hsl(240 10% 3.9%);
+        --card-foreground: hsl(0 0% 98%);
+        --primary: hsl(0 0% 98%);
+        --primary-foreground: hsl(240 5.9% 10%);
+        --secondary: hsl(240 3.7% 15.9%);
+        --secondary-foreground: hsl(0 0% 98%);
+        --muted: hsl(240 3.7% 15.9%);
+        --muted-foreground: hsl(240 5% 64.9%);
+        --accent: hsl(240 3.7% 15.9%);
+        --accent-foreground: hsl(0 0% 98%);
+        --border: hsl(240 3.7% 15.9%);
+        --input: hsl(240 3.7% 15.9%);
+        --ring: hsl(240 4.9% 83.9%);
+        --radius: 0.5rem;
       }
 
       * {
@@ -35,286 +42,363 @@
       }
 
       body {
-        background:
-          radial-gradient(circle at top, #09384b 0%, transparent 45%),
-          linear-gradient(180deg, var(--bg), var(--bg2));
-
-        color: var(--text);
-        font-family:
-          Inter,
-          Segoe UI,
-          system-ui,
-          sans-serif;
+        background: var(--background);
+        color: var(--foreground);
+        font-family: Geist, ui-sans-serif, sans-serif;
+        font-feature-settings: "rlig" 1, "calt" 1;
         overflow: hidden;
+        -webkit-font-smoothing: antialiased;
       }
 
       /* HEADER */
 
       header {
-        height: 64px;
-
+        height: 56px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-        padding: 0 28px;
-
+        padding: 0 1.5rem;
         border-bottom: 1px solid var(--border);
+        background: var(--background);
+      }
 
-        background: rgba(0, 0, 0, 0.15);
-        backdrop-filter: blur(10px);
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+      }
+
+      .brand-mark {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: calc(var(--radius) - 2px);
+        background: var(--primary);
+        color: var(--primary-foreground);
+        display: grid;
+        place-items: center;
+        font-size: 0.7rem;
+        font-weight: 600;
       }
 
       header h1 {
-        font-size: 20px;
-        color: var(--cyan);
-        letter-spacing: 0.08em;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
       }
 
       #clock {
-        color: var(--muted);
-        font-size: 15px;
+        color: var(--muted-foreground);
+        font-size: 0.8125rem;
+        font-variant-numeric: tabular-nums;
       }
 
       /* LAYOUT */
 
       .container {
         display: grid;
-        grid-template-columns: 340px 1fr;
-
-        height: calc(100vh - 64px);
+        grid-template-columns: 360px 1fr;
+        height: calc(100vh - 56px);
       }
 
-      /* LEFT */
+      /* SIDEBAR */
 
       .sidebar {
         display: flex;
         flex-direction: column;
-        gap: 18px;
-
-        padding: 20px;
-
+        gap: 1rem;
+        padding: 1rem;
         border-right: 1px solid var(--border);
+        overflow-y: auto;
       }
 
-      /* PANEL */
+      /* CARD (shadcn) */
 
-      .panel {
-        background: rgba(7, 54, 66, 0.75);
-
+      .card {
+        background: var(--card);
+        color: var(--card-foreground);
         border: 1px solid var(--border);
-
-        border-radius: 14px;
-
+        border-radius: var(--radius);
         overflow: hidden;
-
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       }
 
-      .panel h2 {
-        padding: 12px 16px;
-
-        font-size: 13px;
-
-        letter-spacing: 0.15em;
-
-        text-transform: uppercase;
-
-        color: var(--cyan);
-
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.875rem 1rem;
         border-bottom: 1px solid var(--border);
       }
 
-      .player-controls {
+      .card-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 9999px;
+        border: 1px solid var(--border);
+        padding: 0.125rem 0.5rem;
+        font-size: 0.6875rem;
+        font-weight: 500;
+        color: var(--muted-foreground);
+        background: transparent;
+      }
+
+      .card-content {
+        padding: 1rem;
         display: flex;
-        gap: 8px;
-        padding: 12px;
+        flex-direction: column;
+        gap: 0.75rem;
       }
 
-      .player-controls input {
+      /* CONTROLS */
+
+      .controls {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .input {
         flex: 1;
-
-        padding: 10px 12px;
-
-        border: none;
+        height: 2.25rem;
+        width: 100%;
+        border-radius: calc(var(--radius) - 2px);
+        border: 1px solid var(--input);
+        background: transparent;
+        padding: 0 0.75rem;
+        font-size: 0.875rem;
+        color: var(--foreground);
+        font-family: inherit;
         outline: none;
-
-        border-radius: 8px;
-
-        background: #002b36;
-
-        color: white;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
       }
 
-      .player-controls button {
+      .input::placeholder {
+        color: var(--muted-foreground);
+      }
+
+      .input:focus-visible {
+        border-color: var(--ring);
+        box-shadow: 0 0 0 2px var(--background), 0 0 0 4px hsl(240 4.9% 83.9% / 0.35);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.25rem;
+        white-space: nowrap;
+        border-radius: calc(var(--radius) - 2px);
+        border: 1px solid transparent;
+        padding: 0 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        font-family: inherit;
         cursor: pointer;
-
-        border: none;
-
-        padding: 10px 14px;
-
-        border-radius: 8px;
-
-        background: #268bd2;
-
-        color: white;
-
-        font-weight: bold;
-
-        transition: 0.2s;
+        transition:
+          background-color 0.15s,
+          color 0.15s,
+          opacity 0.15s;
       }
 
-      .player-controls button:hover {
-        filter: brightness(1.1);
+      .btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--background), 0 0 0 4px hsl(240 4.9% 83.9% / 0.35);
       }
 
-      /* PLAYER */
+      .btn-primary {
+        background: var(--primary);
+        color: var(--primary-foreground);
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
 
       .player iframe {
         width: 100%;
-        aspect-ratio: 16/9;
-
+        aspect-ratio: 16 / 9;
         border: none;
-
         display: block;
+        border-radius: calc(var(--radius) - 2px);
+        background: var(--muted);
       }
 
       /* EDITOR */
 
       .editor {
-        padding: 20px;
-
+        padding: 1rem;
         display: flex;
+        min-height: 0;
       }
 
       .notes {
         flex: 1;
-
         display: flex;
         flex-direction: column;
+        min-height: 0;
+      }
+
+      .notes .card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .notes .card-content {
+        flex: 1;
+        padding: 0;
+        min-height: 0;
       }
 
       textarea {
         flex: 1;
-
         width: 100%;
-
+        height: 100%;
         resize: none;
-
         border: none;
         outline: none;
-
-        border-radius: 14px;
-
-        padding: 26px;
-
-        background: rgba(7, 54, 66, 0.78);
-
-        color: var(--text);
-
-        font-size: 16px;
-
-        line-height: 1.8;
-
-        font-family: "JetBrains Mono", Consolas, monospace;
-
-        border: 1px solid var(--border);
+        padding: 1.25rem 1.5rem;
+        background: transparent;
+        color: var(--foreground);
+        font-size: 0.875rem;
+        line-height: 1.7;
+        font-family: "Geist Mono", ui-monospace, monospace;
       }
 
       textarea::placeholder {
-        color: #6e8a8d;
+        color: var(--muted-foreground);
       }
 
       /* FOOTER */
 
       footer {
         position: fixed;
-
-        right: 20px;
-        bottom: 12px;
-
-        color: #4d6b6f;
-
-        font-size: 12px;
+        right: 1rem;
+        bottom: 0.75rem;
+        color: var(--muted-foreground);
+        font-size: 0.75rem;
+        pointer-events: none;
       }
-
-      /* Scroll */
 
       ::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: #335b64;
-        border-radius: 20px;
+        background: var(--border);
+        border-radius: 9999px;
       }
 
       ::-webkit-scrollbar-track {
         background: transparent;
       }
+
+      @media (max-width: 860px) {
+        body {
+          overflow: auto;
+        }
+
+        .container {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .sidebar {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .editor {
+          min-height: 50vh;
+        }
+      }
     </style>
   </head>
   <body>
     <header>
-      <h1>Caladan Focus</h1>
-
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <h1>Caladan Focus</h1>
+      </div>
       <div id="clock"></div>
     </header>
 
     <div class="container">
       <aside class="sidebar">
-        <div class="panel player">
-          <div class="panel player">
-            <h2>Música</h2>
-
-            <div class="player-controls">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Música</h2>
+            <span class="badge">YouTube</span>
+          </div>
+          <div class="card-content">
+            <div class="controls">
               <input
                 id="music-url"
+                class="input"
                 type="text"
                 placeholder="Cole uma URL do YouTube"
               />
-
-              <button onclick="updatePlayer('music')">Atualizar</button>
+              <button class="btn btn-primary" onclick="updatePlayer('music')">
+                Atualizar
+              </button>
             </div>
-
-            <iframe
-              id="music-player"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-            >
-            </iframe>
+            <div class="player">
+              <iframe
+                id="music-player"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
           </div>
         </div>
 
-        <div class="panel player">
-          <div class="panel player">
-            <h2>Brown Noise</h2>
-
-            <div class="player-controls">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Brown Noise</h2>
+            <span class="badge">Ambient</span>
+          </div>
+          <div class="card-content">
+            <div class="controls">
               <input
                 id="noise-url"
+                class="input"
                 type="text"
                 placeholder="Cole uma URL do YouTube"
               />
-
-              <button onclick="updatePlayer('noise')">Atualizar</button>
+              <button class="btn btn-primary" onclick="updatePlayer('noise')">
+                Atualizar
+              </button>
             </div>
-
-            <iframe
-              id="noise-player"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-            >
-            </iframe>
+            <div class="player">
+              <iframe
+                id="noise-player"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            </div>
           </div>
         </div>
       </aside>
 
       <main class="editor">
         <div class="notes">
-          <textarea
-            id="notes"
-            placeholder="# Anotações
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Anotações</h2>
+              <span class="badge">Auto-save</span>
+            </div>
+            <div class="card-content">
+              <textarea
+                id="notes"
+                placeholder="# Anotações
 
 • Tarefas
 • Ideias
@@ -322,12 +406,14 @@
 
 Tudo é salvo automaticamente.
 "
-          ></textarea>
+              ></textarea>
+            </div>
+          </div>
         </div>
       </main>
     </div>
 
-    <footer>Solarized Osaka Focus</footer>
+    <footer>caladan</footer>
 
     <script>
       const DEFAULT_MUSIC =
@@ -346,14 +432,12 @@ Tudo é salvo automaticamente.
 
       function loadPlayers() {
         const music = localStorage.getItem("music-url") || DEFAULT_MUSIC;
-
         const noise = localStorage.getItem("noise-url") || DEFAULT_NOISE;
 
         document.getElementById("music-url").value = music;
         document.getElementById("noise-url").value = noise;
 
         document.getElementById("music-player").src = getEmbedUrl(music);
-
         document.getElementById("noise-player").src = getEmbedUrl(noise);
       }
 
@@ -362,7 +446,6 @@ Tudo é salvo automaticamente.
       function getEmbedUrl(url) {
         try {
           const u = new URL(url);
-
           let id = "";
 
           if (u.hostname.includes("youtu.be")) {
@@ -372,15 +455,10 @@ Tudo é salvo automaticamente.
           }
 
           const t = u.searchParams.get("t");
-
           let seconds = 0;
 
           if (t) {
-            if (t.endsWith("s")) {
-              seconds = parseInt(t);
-            } else {
-              seconds = parseInt(t);
-            }
+            seconds = parseInt(t);
           }
 
           return `https://www.youtube.com/embed/${id}?start=${seconds}`;
@@ -391,33 +469,27 @@ Tudo é salvo automaticamente.
 
       function updatePlayer(type) {
         const input = document.getElementById(type + "-url");
-
         const iframe = document.getElementById(type + "-player");
-
         const embed = getEmbedUrl(input.value);
 
         if (!embed) {
           alert("URL inválida");
-
           return;
         }
 
         iframe.src = embed;
-
         localStorage.setItem(type + "-url", input.value);
       }
 
       function updateClock() {
         const now = new Date();
-
         document.getElementById("clock").textContent =
           now.toLocaleDateString("pt-BR") +
-          " • " +
+          " · " +
           now.toLocaleTimeString("pt-BR");
       }
 
       updateClock();
-
       setInterval(updateClock, 1000);
     </script>
   </body>
