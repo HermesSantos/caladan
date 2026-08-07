@@ -91,7 +91,7 @@ Tudo fica no **Local Storage** do navegador:
 | `noise-url`     | URL do brown noise    |
 | `focus-theme`   | Tema ativo            |
 
-Sem login, sem banco, sem sync — os dados duram enquanto o cache do navegador não for limpo.
+Sem login, sem banco, sem sync — os dados duram enquanto o cache do navegador não for limpo
 
 ## Licença
 
